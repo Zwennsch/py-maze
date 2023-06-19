@@ -1,0 +1,40 @@
+src-folder:
+    - contains modules and packages for the project
+    - the maze-solver subpackages:
+        - __main__.py: makes the enclosing package runnable
+            - this way you can use run it from the cl with: python -m maze-solver ....
+
+
+- pyproject.toml:
+    provides: project configuration, metadata, dependencies
+    needs at minimum a [build-system] table specifying the build tool
+    setuptools is only one possible build tool
+    for more info visit: https://packaging.python.org/en/latest/flow/
+
+- role.py 
+    roles for each possible squares are organized as an enum
+    by extending 'IntEnum' you can make use of 'custom file format'
+    by calling Enum.auto() you get each enum the numeric value in turn.
+    now you can treat each enum as a number eg Role.ENEMY = 1
+    roles are optional -> a null value (None) could indicate a lack of a role
+    to not need to check in conditional branches for for None there is the 'Null Object Pattern':
+        - Stop using None
+        - use dedicated Null Object (here Role.None = 0)
+
+- border.py 
+    this is again implemented as an enum.
+    this time we use enum.IntFlag which uses bit field logic
+    this way you can simulate all 16 possibilities for a Border object:
+        Border.TOP means one border on the north and has the value 1
+        Border.TOP | Border.BOTTOM means one border north and one south and has the border.value 3 
+        you can then check, if the border is of a specific type using the identity test operator 'is':
+            border is Border.TOP # False
+            border is Border.TOP | Border.BOTTOM # True
+        alternatively you could use '==' to test against a numeric value:
+            border == 3 # True
+        additionally you can check teh existence of a given border by using 'in'
+            Border.TOP in border # True
+            Border.LEFT in border # False
+
+time: 29:50
+
