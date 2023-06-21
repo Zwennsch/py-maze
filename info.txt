@@ -36,5 +36,18 @@ src-folder:
             Border.TOP in border # True
             Border.LEFT in border # False
 
-time: 29:50
+- square.py
+    implemented as a dataclass; frozen = True means immutable
+    the index could be implemented from row and column but you'd also need to know width and height of the maze 
+        wich are not part of the square itself
+        this would break encapsulation
+    the role is optional
+
+- maze.py
+    with the help of defining an __iter__ function you can later in the height funtion make use of it:
+        for square in self, because the max function takes an iterable which the Maze object itself is now
+    because looping is a costly operation you make use of the @cached_property from functools
+
+
+time: 35:10
 
